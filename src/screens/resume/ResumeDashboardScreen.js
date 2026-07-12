@@ -160,6 +160,14 @@ const ResumeDashboardScreen = () => {
          >
              <Icon name="trash-can-outline" size={16} color={theme.danger} />
          </TouchableOpacity>
+
+         <TouchableOpacity
+            style={[styles.actionBtn, {backgroundColor: theme.primary + '15'}]}
+            onPress={() => navigation.navigate(ROUTES.ATS_SCORE, { resumeId: item.id })}
+         >
+             <Icon name="chart-line" size={16} color={theme.primary} />
+             <Text style={[typography.caption, { color: theme.primary, marginLeft: 4, fontWeight: 'bold' }]}>ATS</Text>
+         </TouchableOpacity>
       </View>
     </PremiumCard>
   );
