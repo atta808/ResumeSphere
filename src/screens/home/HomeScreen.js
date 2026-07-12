@@ -73,6 +73,12 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate(ROUTES.INTERVIEW_PREP)}
             theme={theme}
           />
+          <HomeCard
+            title="Import Resume"
+            icon="cloud-upload-outline"
+            onPress={() => navigation.navigate(ROUTES.IMPORT_MENU)}
+            theme={theme}
+          />
         </View>
       </ScrollView>
     </View>

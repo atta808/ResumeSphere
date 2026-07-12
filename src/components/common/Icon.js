@@ -10,7 +10,7 @@ const Icon = ({ family = 'MaterialCommunityIcons', name, size, color, style }) =
       return <Feather name={name} size={size} color={color} style={style} />;
     case 'MaterialCommunityIcons':
     default:
-      return <Icon name={name} size={size} color={color} style={style} />;
+      return <MaterialCommunityIcons name={name} size={size} color={color} style={style} />;
   }
 };
 

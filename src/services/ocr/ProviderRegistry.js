@@ -1,3 +1,5 @@
+import GoogleVisionProvider from './GoogleVisionProvider';
+
 class OCRProviderRegistry {
   constructor() {
     this.providers = new Map();
@@ -23,4 +25,11 @@ class OCRProviderRegistry {
   }
 }
 
-export default new OCRProviderRegistry();
+const registry = new OCRProviderRegistry();
+
+// Auto-register and set Google Vision as default
+const googleVision = new GoogleVisionProvider();
+registry.registerProvider('google-vision', googleVision);
+registry.setActiveProvider('google-vision');
+
+export default registry;
