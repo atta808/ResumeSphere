@@ -1,5 +1,6 @@
 import { MIGRATION_001 } from './Migration001';
 import { MIGRATION_002 } from './Migration002';
+import { MIGRATION_003 } from './Migration003';
 
 class MigrationManager {
   static async runMigrations(db) {
@@ -21,7 +22,8 @@ class MigrationManager {
       // Define migrations sequentially
       const migrations = [
         { version: 1, query: MIGRATION_001 },
-        { version: 2, query: MIGRATION_002 }
+        { version: 2, query: MIGRATION_002 },
+        { version: 3, query: MIGRATION_003 }
         // Future migrations go here
       ];
 

@@ -11,4 +11,6 @@ export { default as SearchBar } from './SearchBar';
 export { default as LoadingOverlay } from './LoadingOverlay';
 export { default as SkeletonLoader } from './SkeletonLoader';
 export { default as EmptyState } from './EmptyState';
+export { default as PremiumModal } from './PremiumModal';
+export { default as ResumePickerModal } from './ResumePickerModal';
 export { ToastProvider, useToast } from './ToastProvider';
