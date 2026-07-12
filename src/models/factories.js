@@ -39,6 +39,26 @@ export const createProfile = (data = {}) => {
   };
 };
 
+export const createResume = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    profileId: data.profileId || null,
+    resumeName: sanitizeString(data.resumeName) || 'Untitled Resume',
+    templateId: data.templateId || 'default',
+    isArchived: data.isArchived ? 1 : 0,
+    targetJobTitle: sanitizeString(data.targetJobTitle),
+    companyName: sanitizeString(data.companyName),
+    resumeVersion: data.resumeVersion || 1,
+    atsScore: data.atsScore || 0,
+    language: sanitizeString(data.language) || 'en',
+    lastExportedAt: data.lastExportedAt || null,
+    createdAt: data.createdAt || now,
+    updatedAt: now,
+    deletedAt: data.deletedAt || null,
+  };
+};
+
 export const createEducation = (data = {}) => {
   const now = new Date().toISOString();
   return {
