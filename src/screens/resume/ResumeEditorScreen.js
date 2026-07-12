@@ -53,15 +53,24 @@ const ResumeEditorScreen = () => {
     navigation.navigate(ROUTES.RESUME_PREVIEW, { resumeId });
   };
 
+  const handleATS = () => {
+    navigation.navigate(ROUTES.ATS_SCORE, { resumeId });
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <PremiumHeader
         title={resume?.resumeName || 'Resume Editor'}
         onBack={() => navigation.goBack()}
         rightAction={
-          <TouchableOpacity onPress={handlePreview} style={styles.previewBtn} accessibilityLabel="Preview Resume">
-             <Icon name="eye-outline" size={24} color={theme.primary} />
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+             <TouchableOpacity onPress={handleATS} style={[styles.previewBtn, {marginRight: 8}]} accessibilityLabel="ATS Score">
+                <Icon name="chart-line" size={24} color={theme.primary} />
+             </TouchableOpacity>
+             <TouchableOpacity onPress={handlePreview} style={styles.previewBtn} accessibilityLabel="Preview Resume">
+                <Icon name="eye-outline" size={24} color={theme.primary} />
+             </TouchableOpacity>
+          </View>
         }
       />
 

@@ -2,6 +2,7 @@ import { MIGRATION_001 } from './Migration001';
 import { MIGRATION_002 } from './Migration002';
 import { MIGRATION_003 } from './Migration003';
 import { MIGRATION_004 } from './Migration004';
+import { MIGRATION_005 } from './Migration005';
 
 class MigrationManager {
   static async runMigrations(db) {
@@ -25,7 +26,8 @@ class MigrationManager {
         { version: 1, query: MIGRATION_001 },
         { version: 2, query: MIGRATION_002 },
         { version: 3, query: MIGRATION_003 },
-        { version: 4, query: MIGRATION_004 }
+        { version: 4, query: MIGRATION_004 },
+        { version: 5, query: MIGRATION_005 }
         // Future migrations go here
       ];
 
