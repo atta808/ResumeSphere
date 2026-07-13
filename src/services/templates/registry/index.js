@@ -7,6 +7,7 @@ import Creative from './Creative';
 import Academic from './Academic';
 import Corporate from './Corporate';
 import International from './International';
+import StandardDocument from './StandardDocument';
 
 // Initialize templates
 TemplateRegistry.register(ClassicATS);
@@ -17,5 +18,6 @@ TemplateRegistry.register(Creative);
 TemplateRegistry.register(Academic);
 TemplateRegistry.register(Corporate);
 TemplateRegistry.register(International);
+TemplateRegistry.register(StandardDocument);
 
 export default TemplateRegistry;

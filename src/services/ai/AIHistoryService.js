@@ -5,9 +5,9 @@ class AIHistoryService {
   /**
    * Retrieves all sessions for a specific profile (and optionally a specific resume)
    */
-  async getSessions(profileId, resumeId = null) {
+  async getSessions(profileId, resumeId = null, includeHidden = false) {
     if (!profileId) throw new Error('Profile ID is required to fetch AI history.');
-    return await AIHistoryRepository.getSessions(profileId, resumeId);
+    return await AIHistoryRepository.getSessions(profileId, resumeId, includeHidden);
   }
 
   /**

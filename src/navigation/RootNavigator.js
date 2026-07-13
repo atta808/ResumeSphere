@@ -7,6 +7,7 @@ import { ROUTES } from './routes';
 
 import WelcomeScreen from '../screens/welcome/WelcomeScreen';
 import MainTabNavigator from './MainTabNavigator';
+import DocumentNavigator from './DocumentNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ const RootNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={ROUTES.WELCOME} component={WelcomeScreen} />
         <Stack.Screen name={ROUTES.MAIN_TABS} component={MainTabNavigator} />
+        <Stack.Screen name={ROUTES.DOCUMENT_NAVIGATOR} component={DocumentNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
