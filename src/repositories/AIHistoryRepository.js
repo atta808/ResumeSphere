@@ -18,10 +18,15 @@ class AIHistoryRepository {
     return await this.sessionRepo.create(sessionData);
   }
 
-  async getSessions(profileId, resumeId = null) {
+  async getSessions(profileId, resumeId = null, includeHidden = false) {
     try {
       let query = 'SELECT * FROM ai_conversation_sessions WHERE profileId = ?';
       const params = [profileId];
+
+      if (!includeHidden) {
+        query += ' AND title != ?';
+        params.push('DOCUMENT_SESSION');
+      }
 
       if (resumeId) {
         query += ' AND resumeId = ?';
