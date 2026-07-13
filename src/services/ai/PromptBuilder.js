@@ -6,6 +6,12 @@ import { InterviewPrompt } from './prompts/InterviewPrompt';
 import { SkillsPrompt } from './prompts/SkillsPrompt';
 import { CareerAdvicePrompt } from './prompts/CareerAdvicePrompt';
 import { GenericChatPrompt } from './prompts/GenericChatPrompt';
+import { TailoredSummaryPrompt } from './prompts/TailoredSummaryPrompt';
+import { TailoredExperiencePrompt } from './prompts/TailoredExperiencePrompt';
+import { TailoredSkillsPrompt } from './prompts/TailoredSkillsPrompt';
+import { TailoredProjectsPrompt } from './prompts/TailoredProjectsPrompt';
+import { TailoredCoverLetterPrompt } from './prompts/TailoredCoverLetterPrompt';
+import { JobGapAnalysisPrompt } from './prompts/JobGapAnalysisPrompt';
 import { AI_ACTION_TYPES } from '../../config/ai';
 
 class PromptBuilder {
@@ -37,6 +43,24 @@ class PromptBuilder {
         break;
       case AI_ACTION_TYPES.CAREER_ADVICE:
         systemPrompt = CareerAdvicePrompt(context);
+        break;
+      case AI_ACTION_TYPES.TAILOR_SUMMARY:
+        systemPrompt = TailoredSummaryPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.TAILOR_EXPERIENCE:
+        systemPrompt = TailoredExperiencePrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.TAILOR_SKILLS:
+        systemPrompt = TailoredSkillsPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.TAILOR_PROJECTS:
+        systemPrompt = TailoredProjectsPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.TAILOR_COVER_LETTER:
+        systemPrompt = TailoredCoverLetterPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.JOB_GAP_ANALYSIS:
+        systemPrompt = JobGapAnalysisPrompt.build(context);
         break;
       case AI_ACTION_TYPES.GENERIC_CHAT:
       default:

@@ -168,6 +168,14 @@ const ResumeDashboardScreen = () => {
              <Icon name="chart-line" size={16} color={theme.primary} />
              <Text style={[typography.caption, { color: theme.primary, marginLeft: 4, fontWeight: 'bold' }]}>ATS</Text>
          </TouchableOpacity>
+
+         <TouchableOpacity
+            style={[styles.actionBtn, {backgroundColor: theme.success + '15'}]}
+            onPress={() => navigation.navigate(ROUTES.JOB_DESCRIPTION_INPUT, { resumeId: item.id })}
+         >
+             <Icon name="briefcase-search-outline" size={16} color={theme.success} />
+             <Text style={[typography.caption, { color: theme.success, marginLeft: 4, fontWeight: 'bold' }]}>Match Job</Text>
+         </TouchableOpacity>
       </View>
     </PremiumCard>
   );

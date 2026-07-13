@@ -39,6 +39,57 @@ export const createProfile = (data = {}) => {
   };
 };
 
+export const createJobDescription = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    companyName: sanitizeString(data.companyName),
+    jobTitle: sanitizeString(data.jobTitle),
+    location: sanitizeString(data.location),
+    employmentType: sanitizeString(data.employmentType),
+    salary: sanitizeString(data.salary),
+    experienceRequired: sanitizeString(data.experienceRequired),
+    educationRequired: sanitizeString(data.educationRequired),
+    requiredSkills: sanitizeString(data.requiredSkills),
+    preferredSkills: sanitizeString(data.preferredSkills),
+    responsibilities: sanitizeString(data.responsibilities),
+    qualifications: sanitizeString(data.qualifications),
+    certifications: sanitizeString(data.certifications),
+    languages: sanitizeString(data.languages),
+    benefits: sanitizeString(data.benefits),
+    originalText: sanitizeString(data.originalText),
+    parsedVersion: sanitizeString(data.parsedVersion),
+    createdAt: data.createdAt || now,
+    updatedAt: now,
+  };
+};
+
+export const createJobMatch = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    resumeId: data.resumeId || null,
+    jobDescriptionId: data.jobDescriptionId || null,
+    overallScore: data.overallScore || 0,
+    skillsScore: data.skillsScore || 0,
+    experienceScore: data.experienceScore || 0,
+    educationScore: data.educationScore || 0,
+    keywordScore: data.keywordScore || 0,
+    responsibilityScore: data.responsibilityScore || 0,
+    certificationScore: data.certificationScore || 0,
+    languageScore: data.languageScore || 0,
+    matchedItems: sanitizeString(data.matchedItems),
+    missingItems: sanitizeString(data.missingItems),
+    extraItems: sanitizeString(data.extraItems),
+    recommendations: sanitizeString(data.recommendations),
+    processingTime: data.processingTime || 0,
+    provider: sanitizeString(data.provider),
+    algorithmVersion: sanitizeString(data.algorithmVersion) || '1.0',
+    createdAt: data.createdAt || now,
+    updatedAt: now,
+  };
+};
+
 export const createResume = (data = {}) => {
   const now = new Date().toISOString();
   return {
