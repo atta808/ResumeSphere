@@ -176,6 +176,14 @@ const ResumeDashboardScreen = () => {
              <Icon name="briefcase-search-outline" size={16} color={theme.success} />
              <Text style={[typography.caption, { color: theme.success, marginLeft: 4, fontWeight: 'bold' }]}>Match Job</Text>
          </TouchableOpacity>
+
+         <TouchableOpacity
+            style={[styles.actionBtn, {backgroundColor: theme.primary + '15'}]}
+            onPress={() => navigation.navigate(ROUTES.PORTFOLIO_NAVIGATOR)}
+         >
+             <Icon name="web" size={16} color={theme.primary} />
+             <Text style={[typography.caption, { color: theme.primary, marginLeft: 4, fontWeight: 'bold' }]}>Portfolio</Text>
+         </TouchableOpacity>
       </View>
     </PremiumCard>
   );
