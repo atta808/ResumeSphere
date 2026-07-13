@@ -4,6 +4,7 @@ import { generateUUID } from '../../utils/helpers';
 import InterviewRepository from './InterviewRepository';
 import dbManager from '../../database/sqlite';
 import { createInterviewSession, createInterviewQuestion, createInterviewAnswer } from '../../models/factories';
+import Logger from '../../utils/logger';
 
 class InterviewService {
   async createSession({ profileId, resumeId, jobDescriptionId, interviewType, difficulty, companyName, position }) {
@@ -64,7 +65,7 @@ class InterviewService {
       }
       return createdQuestions;
     } catch (error) {
-      console.error('Failed to parse AI generated questions', error);
+      Logger.error('Failed to parse AI generated questions', error);
       throw new Error('AI returned an invalid format for questions.');
     }
   }
@@ -113,7 +114,7 @@ class InterviewService {
       await InterviewRepository.insertAnswer(interviewAnswer);
       return interviewAnswer;
     } catch (error) {
-      console.error('Failed to parse AI feedback', error);
+      Logger.error('Failed to parse AI feedback', error);
       throw new Error('AI returned an invalid format for feedback.');
     }
   }

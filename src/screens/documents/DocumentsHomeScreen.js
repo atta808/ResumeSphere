@@ -6,6 +6,7 @@ import { useTheme, spacing, typography } from '../../theme';
 import { ROUTES } from '../../navigation/routes';
 import { DocumentService } from '../../services/documents';
 import { useProfile } from '../../hooks/useProfile';
+import Logger from '../../utils/logger';
 
 const DocumentsHomeScreen = () => {
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ const DocumentsHomeScreen = () => {
       const docs = await DocumentService.getDocumentsByProfile(profile.id);
       setDocuments(docs);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
     } finally {
       setLoading(false);
     }

@@ -8,6 +8,7 @@ import PremiumButton from '../../components/common/PremiumButton';
 import { portfolioService } from '../../services/portfolio/PortfolioService';
 import { resumeService } from '../../services/resume/ResumeService';
 import { profileService } from '../../services/profile/ProfileService';
+import Logger from '../../utils/logger';
 
 export default function PortfolioDashboardScreen() {
   const navigation = useNavigation();
@@ -24,7 +25,7 @@ export default function PortfolioDashboardScreen() {
         setPortfolios(userPortfolios);
       }
     } catch (error) {
-      console.error('Failed to load portfolios:', error);
+      Logger.error('Failed to load portfolios:', error);
       Alert.alert('Error', 'Could not load portfolios');
     } finally {
       setLoading(false);
@@ -56,7 +57,7 @@ export default function PortfolioDashboardScreen() {
       const result = await portfolioService.createPortfolio(profile.id, defaultResume.id, {});
       navigation.navigate(ROUTES.PORTFOLIO_PREVIEW, { portfolioId: result.portfolio.id });
     } catch (error) {
-      console.error('Error creating portfolio:', error);
+      Logger.error('Error creating portfolio:', error);
       Alert.alert('Error', 'Could not create a new portfolio');
     }
   };

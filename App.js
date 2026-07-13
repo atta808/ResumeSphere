@@ -1,3 +1,4 @@
+import Logger from './src/utils/logger';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -20,7 +21,7 @@ export default function App() {
         await dbManager.init();
         await AuthService.initialize(); // Initialize Auth before rendering
       } catch (e) {
-        console.error("Initialization failed", e);
+        Logger.error("Initialization failed", e);
       } finally {
         setDbInitialized(true);
       }

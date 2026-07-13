@@ -7,6 +7,7 @@ import { ROUTES } from '../../navigation/routes';
 import { useProfile } from '../../hooks/useProfile';
 import { useResumes } from '../../hooks/useResumes';
 import InterviewEngine from '../../services/interview/InterviewEngine';
+import Logger from '../../utils/logger';
 
 const INTERVIEW_TYPES = ['Behavioral', 'Technical', 'HR', 'STAR', 'Executive'];
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
@@ -58,7 +59,7 @@ const InterviewConfigurationScreen = () => {
       // Navigate to the session passing the created ID
       navigation.replace(ROUTES.INTERVIEW_SESSION, { sessionId: session.id });
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Error', 'Failed to start interview session.');
     } finally {
       setIsLoading(false);

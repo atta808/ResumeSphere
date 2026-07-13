@@ -1,5 +1,6 @@
 import { AnalyticsProvider } from './AnalyticsProvider';
 import * as Crypto from 'expo-crypto';
+import Logger from '../../utils/logger';
 
 export class LocalAnalyticsProvider extends AnalyticsProvider {
   constructor(db) {
@@ -14,7 +15,7 @@ export class LocalAnalyticsProvider extends AnalyticsProvider {
 
   async track(eventName, properties = {}) {
     if (!this.db) {
-      console.warn('LocalAnalyticsProvider: db not initialized.');
+      Logger.warn('LocalAnalyticsProvider: db not initialized.');
       return;
     }
 
@@ -30,7 +31,7 @@ export class LocalAnalyticsProvider extends AnalyticsProvider {
         [id, portfolioId, eventName, eventData, createdAt]
       );
     } catch (error) {
-      console.error('LocalAnalyticsProvider track error:', error);
+      Logger.error('LocalAnalyticsProvider track error:', error);
     }
   }
 

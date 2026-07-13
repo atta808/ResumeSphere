@@ -1,5 +1,6 @@
 import AIService from '../ai/AIService';
 import { AI_ACTION_TYPES } from '../../config/ai';
+import Logger from '../../utils/logger';
 
 class CertificationEngine {
   async recommendCertifications(context, sessionId) {
@@ -16,7 +17,7 @@ class CertificationEngine {
         return { error: 'Failed to parse AI response as JSON.', rawText: response.text };
       }
     } catch (error) {
-      console.error('CertificationEngine Error:', error);
+      Logger.error('CertificationEngine Error:', error);
       throw error;
     }
   }

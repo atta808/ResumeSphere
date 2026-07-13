@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { PremiumHeader, PremiumButton } from '../../components/common';
 import { useTheme, spacing } from '../../theme';
 import { DocumentService } from '../../services/documents';
+import Logger from '../../utils/logger';
 
 const DocumentEditorScreen = () => {
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ const DocumentEditorScreen = () => {
         setDocument(doc);
         setContent(doc.content);
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         Alert.alert('Error', 'Could not load document for editing.');
       }
     };
@@ -34,7 +35,7 @@ const DocumentEditorScreen = () => {
       await DocumentService.saveDocument({ ...document, content });
       navigation.goBack();
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Error', 'Failed to save edits.');
     }
   };

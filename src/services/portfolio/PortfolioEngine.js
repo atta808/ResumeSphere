@@ -1,4 +1,5 @@
 import * as Crypto from 'expo-crypto';
+import Logger from '../../utils/logger';
 
 export class PortfolioEngine {
   constructor(portfolioRepo, historyService, renderer) {
@@ -73,7 +74,7 @@ export class PortfolioEngine {
       const result = await CloudService.publishPortfolio(data.portfolio.portfolioId, htmlContent);
       publicUrl = result.url;
     } catch(err) {
-      console.warn('Cloud publish failed, using offline fallback URL.', err);
+      Logger.warn('Cloud publish failed, using offline fallback URL.', err);
     }
 
     await this.portfolioRepo.updatePortfolio(portfolioId, { status: 'published' });

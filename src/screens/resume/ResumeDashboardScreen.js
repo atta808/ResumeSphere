@@ -17,6 +17,7 @@ import { ROUTES } from '../../navigation/routes';
 import { useResumes } from '../../hooks/useResumes';
 import { spacing, typography, radius } from '../../theme';
 import { formatDate } from '../../utils/helpers';
+import Logger from '../../utils/logger';
 
 const ResumeDashboardScreen = () => {
   const { theme } = useTheme();
@@ -55,7 +56,7 @@ const ResumeDashboardScreen = () => {
       const newResume = await createResume({ resumeName: 'New Resume' });
       navigation.navigate(ROUTES.RESUME_EDITOR, { resumeId: newResume.id });
     } catch (e) {
-      console.error(e);
+      Logger.error(e);
       Alert.alert('Error', 'Failed to create resume.');
     }
   };
@@ -68,7 +69,7 @@ const ResumeDashboardScreen = () => {
     try {
       await duplicateResume(id, `${currentName} (Copy)`);
     } catch (e) {
-      console.error(e);
+      Logger.error(e);
       Alert.alert('Error', 'Failed to duplicate resume.');
     }
   };

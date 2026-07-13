@@ -5,6 +5,7 @@ import { PremiumHeader, Button, PremiumCard, Icon } from '../../components/commo
 import { useTheme } from '../../theme';
 import { ROUTES } from '../../navigation/routes';
 import InterviewEngine from '../../services/interview/InterviewEngine';
+import Logger from '../../utils/logger';
 
 const InterviewFeedbackScreen = () => {
   const { theme } = useTheme();
@@ -25,7 +26,7 @@ const InterviewFeedbackScreen = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         if (isMounted) setLoading(false);
       }
     };

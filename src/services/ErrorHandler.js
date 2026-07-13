@@ -1,5 +1,6 @@
 import { ERROR_CODES } from '../constants/appConstants';
 import ENV from '../config/env';
+import Logger from '../utils/logger';
 
 /**
  * Centralized ErrorHandler Service
@@ -11,7 +12,7 @@ class ErrorHandler {
    */
   static logError(error, context = {}) {
     if (ENV.DEBUG_MODE) {
-      console.error('ErrorHandler Log:', error, context);
+      Logger.error('ErrorHandler Log:', error, context);
     }
     // TODO: Add remote logging service integration here (e.g., Sentry, Crashlytics)
   }

@@ -8,6 +8,7 @@ import { useATS } from '../../hooks/useATS';
 import { useATSHistory } from '../../hooks/useATSHistory';
 import { ROUTES } from '../../navigation/routes';
 import { formatDate } from '../../utils/helpers';
+import Logger from '../../utils/logger';
 
 const ATSScoreScreen = () => {
   const { theme } = useTheme();
@@ -27,7 +28,7 @@ const ATSScoreScreen = () => {
            loadHistory(resumeId);
         })
         .catch(err => {
-           console.error('Analysis failed', err);
+           Logger.error('Analysis failed', err);
         });
     }
   }, [resumeId, analyze, loadHistory]);

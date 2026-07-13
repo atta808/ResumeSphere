@@ -3,6 +3,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import ENV from '../config/env';
 import AuthService from '../services/auth/AuthService';
 import SessionManager from '../services/auth/SessionManager';
+import Logger from '../utils/logger';
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -21,7 +22,7 @@ export const useAuth = () => {
       AuthService.signInWithGoogle(id_token).then(() => {
         setUser(SessionManager.getCurrentUser());
       }).catch(err => {
-        console.error('Failed to sign in with Google', err);
+        Logger.error('Failed to sign in with Google', err);
       });
     }
   }, [response]);

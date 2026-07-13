@@ -1,6 +1,7 @@
 import { BaseAuthProvider } from './BaseAuthProvider';
 import { signInWithEmailAndPassword, signInAnonymously, GoogleAuthProvider, signInWithCredential, signOut as firebaseSignOut, signInWithCustomToken } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import Logger from '../../utils/logger';
 
 export class FirebaseAuthProvider extends BaseAuthProvider {
   async restoreAuthState(customToken) {
@@ -8,7 +9,7 @@ export class FirebaseAuthProvider extends BaseAuthProvider {
       try {
         await signInWithCustomToken(auth, customToken);
       } catch (err) {
-        console.warn('Firebase Custom Token sign in failed, relying on SDK persistence:', err);
+        Logger.warn('Firebase Custom Token sign in failed, relying on SDK persistence:', err);
       }
     }
   }

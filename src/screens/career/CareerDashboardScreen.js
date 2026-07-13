@@ -7,6 +7,7 @@ import { useTheme } from '../../theme';
 import CareerCoachService from '../../services/career/CareerCoachService';
 import { useProfile } from '../../hooks/useProfile';
 import { ROUTES } from '../../navigation/routes';
+import Logger from '../../utils/logger';
 
 const CareerDashboardScreen = () => {
   const { theme } = useTheme();
@@ -24,7 +25,7 @@ const CareerDashboardScreen = () => {
       const data = await CareerCoachService.getDashboardState(profile.id);
       setDashboardData(data);
     } catch (error) {
-      console.error('Failed to load career dashboard:', error);
+      Logger.error('Failed to load career dashboard:', error);
     } finally {
       setLoading(false);
     }
@@ -43,7 +44,7 @@ const CareerDashboardScreen = () => {
       const data = await CareerCoachService.generateCareerPlan(profile.id, dashboardData.currentGoal.id);
       setDashboardData(data);
     } catch (error) {
-      console.error('Failed to generate career plan:', error);
+      Logger.error('Failed to generate career plan:', error);
       alert('Failed to generate career plan. Please try again.');
     } finally {
       setGenerating(false);

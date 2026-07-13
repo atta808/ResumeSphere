@@ -1,5 +1,6 @@
 import AIService from '../ai/AIService';
 import { AI_ACTION_TYPES } from '../../config/ai';
+import Logger from '../../utils/logger';
 
 class CareerSwitchEngine {
   async planSwitch(context, sessionId) {
@@ -16,7 +17,7 @@ class CareerSwitchEngine {
         return { error: 'Failed to parse AI response as JSON.', rawText: response.text };
       }
     } catch (error) {
-      console.error('CareerSwitchEngine Error:', error);
+      Logger.error('CareerSwitchEngine Error:', error);
       throw error;
     }
   }

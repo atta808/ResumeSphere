@@ -7,6 +7,7 @@ import { useTheme } from '../../theme';
 import Icon from '../../components/common/Icon';
 import { portfolioService } from '../../services/portfolio/PortfolioService';
 import { resumeService } from '../../services/resume/ResumeService';
+import Logger from '../../utils/logger';
 
 export default function PortfolioPreviewScreen() {
   const route = useRoute();
@@ -29,7 +30,7 @@ export default function PortfolioPreviewScreen() {
       const html = await portfolioService.previewPortfolio(portfolioId, resumeData);
       setHtmlContent(html);
     } catch (error) {
-      console.error('Failed to load preview:', error);
+      Logger.error('Failed to load preview:', error);
       Alert.alert('Error', 'Could not generate portfolio preview');
     } finally {
       setLoading(false);
