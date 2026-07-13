@@ -55,6 +55,8 @@ class AIService {
       experience: fullProfile.experience || [],
       skills: fullProfile.skills || [],
       education: fullProfile.education || [],
+      // Optional job description context added ad-hoc
+      jobDescription: null,
       // By isolating these, the PromptBuilder can selectively include what it needs
       // avoiding sending massive unrelated context to DeepSeek (e.g., certificates when not needed).
     };
@@ -72,7 +74,7 @@ class AIService {
    * @param {AbortSignal} params.abortSignal - (Optional) Signal to cancel request
    * @returns {Object} Normalized response and AI metadata
    */
-  async processRequest({ actionType, profileId, resumeId, sessionId, userMessage = null, abortSignal = null }) {
+  async processRequest({ actionType, profileId, resumeId, sessionId, userMessage = null, abortSignal = null, jobDescriptionContext = null }) {
     if (!this.isInitialized) {
       await this.initialize();
     }
@@ -83,6 +85,10 @@ class AIService {
 
     // Auto-fetch context from service layer instead of relying on the UI
     const context = await this.buildContext(profileId, resumeId);
+
+    if (jobDescriptionContext) {
+      context.jobDescription = jobDescriptionContext;
+    }
 
     // 1. Log the user's prompt in history
     // We only log the userMessage as the 'user' role so the chat UI stays clean.
@@ -187,6 +193,39 @@ class AIService {
     return this.processRequest({
       actionType: AI_ACTION_TYPES.CAREER_ADVICE,
       context,
+      sessionId,
+      abortSignal,
+    });
+  }
+
+  async tailorResumeSummary(profileId, resumeId, jobDescriptionContext, sessionId, abortSignal = null) {
+    return this.processRequest({
+      actionType: AI_ACTION_TYPES.TAILOR_SUMMARY,
+      profileId,
+      resumeId,
+      jobDescriptionContext,
+      sessionId,
+      abortSignal,
+    });
+  }
+
+  async tailorResumeExperience(profileId, resumeId, jobDescriptionContext, sessionId, abortSignal = null) {
+    return this.processRequest({
+      actionType: AI_ACTION_TYPES.TAILOR_EXPERIENCE,
+      profileId,
+      resumeId,
+      jobDescriptionContext,
+      sessionId,
+      abortSignal,
+    });
+  }
+
+  async tailorResumeSkills(profileId, resumeId, jobDescriptionContext, sessionId, abortSignal = null) {
+    return this.processRequest({
+      actionType: AI_ACTION_TYPES.TAILOR_SKILLS,
+      profileId,
+      resumeId,
+      jobDescriptionContext,
       sessionId,
       abortSignal,
     });
