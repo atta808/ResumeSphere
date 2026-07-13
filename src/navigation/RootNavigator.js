@@ -10,6 +10,7 @@ import MainTabNavigator from './MainTabNavigator';
 import DocumentNavigator from './DocumentNavigator';
 import InterviewNavigator from './InterviewNavigator';
 import CareerNavigator from './CareerNavigator';
+import PortfolioNavigator from './PortfolioNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ const RootNavigator = () => {
         <Stack.Screen name={ROUTES.DOCUMENT_NAVIGATOR} component={DocumentNavigator} />
         <Stack.Screen name={ROUTES.INTERVIEW_NAVIGATOR} component={InterviewNavigator} />
         <Stack.Screen name={ROUTES.CAREER_NAVIGATOR} component={CareerNavigator} />
+        <Stack.Screen name={ROUTES.PORTFOLIO_NAVIGATOR} component={PortfolioNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
