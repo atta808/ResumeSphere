@@ -1,5 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+import Logger from '../../utils/logger';
 
 export class PortfolioShareService {
   constructor(portfolioEngine, analyticsService) {
@@ -25,10 +26,10 @@ export class PortfolioShareService {
           await this.analyticsService.track('PORTFOLIO_SHARED', { portfolioId, type: 'html' });
         }
       } else {
-        console.warn('Sharing is not available on this platform.');
+        Logger.warn('Sharing is not available on this platform.');
       }
     } catch (error) {
-      console.error('Error exporting HTML:', error);
+      Logger.error('Error exporting HTML:', error);
       throw error;
     }
   }

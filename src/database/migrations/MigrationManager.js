@@ -10,6 +10,7 @@ import { MIGRATION_009 } from './Migration009';
 import { MIGRATION_010 } from './Migration010';
 import { MIGRATION_011 } from './Migration011';
 import { MIGRATION_012 } from './Migration012';
+import Logger from '../../utils/logger';
 
 class MigrationManager {
   static async runMigrations(db) {
@@ -59,7 +60,7 @@ class MigrationManager {
         }
       }
     } catch (error) {
-      console.error('Migration failed:', error);
+      Logger.error('Migration failed:', error);
       throw error;
     }
   }

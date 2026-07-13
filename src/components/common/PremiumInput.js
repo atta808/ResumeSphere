@@ -84,7 +84,7 @@ const PremiumInput = ({
           <Icon name={leftIcon} size={20} color={theme.textSecondary} style={styles.leftIcon} />
         )}
 
-        <TextInput
+        <TextInput accessibilityLabel={label || placeholder || "Input field"}
           style={[
             styles.input,
             typography.body,

@@ -3,6 +3,7 @@ import { useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeContext } from './ThemeContext';
 import { lightTheme, darkTheme } from './colors';
+import Logger from '../utils/logger';
 
 const THEME_STORAGE_KEY = '@ResumeSphere_ThemeMode';
 
@@ -19,7 +20,7 @@ export const ThemeProvider = ({ children }) => {
           setThemeModeState(storedThemeMode);
         }
       } catch (error) {
-        console.error('Failed to load theme mode:', error);
+        Logger.error('Failed to load theme mode:', error);
       } finally {
         setIsReady(true);
       }
@@ -32,7 +33,7 @@ export const ThemeProvider = ({ children }) => {
     try {
       await AsyncStorage.setItem(THEME_STORAGE_KEY, mode);
     } catch (error) {
-      console.error('Failed to save theme mode:', error);
+      Logger.error('Failed to save theme mode:', error);
     }
   };
 

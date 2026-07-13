@@ -7,6 +7,7 @@ import { ROUTES } from '../../navigation/routes';
 import { DocumentEngine } from '../../services/documents';
 import { useProfile } from '../../hooks/useProfile';
 import { DOCUMENT_TYPES } from '../../config/documents';
+import Logger from '../../utils/logger';
 
 const DocumentGeneratorScreen = () => {
   const { theme } = useTheme();
@@ -33,7 +34,7 @@ const DocumentGeneratorScreen = () => {
 
       navigation.replace(ROUTES.DOCUMENT_PREVIEW, { documentId: doc.id });
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Error', 'Failed to generate document');
     } finally {
       setIsGenerating(false);

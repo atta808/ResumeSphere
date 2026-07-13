@@ -22,7 +22,7 @@ class AnalyticsService {
       try {
         await provider.initialize();
       } catch (error) {
-        console.error('Failed to initialize analytics provider:', error);
+        Logger.error('Failed to initialize analytics provider:', error);
       }
     }
     this.initialized = true;
@@ -35,12 +35,12 @@ class AnalyticsService {
    */
   async track(eventName, properties = {}) {
     if (!this.initialized) {
-      console.warn('AnalyticsService: tracking event before initialization');
+      Logger.warn('AnalyticsService: tracking event before initialization');
     }
 
     const promises = this.providers.map(provider =>
       provider.track(eventName, properties).catch(error => {
-        console.error(`Provider tracking failed for event: ${eventName}`, error);
+        Logger.error(`Provider tracking failed for event: ${eventName}`, error);
       })
     );
     await Promise.all(promises);
@@ -53,7 +53,7 @@ class AnalyticsService {
   async setUserProperties(properties) {
     const promises = this.providers.map(provider =>
       provider.setUserProperties(properties).catch(error => {
-        console.error(`Provider user properties failed`, error);
+        Logger.error(`Provider user properties failed`, error);
       })
     );
     await Promise.all(promises);
@@ -63,6 +63,7 @@ class AnalyticsService {
 // Export singleton instance
 import SQLiteService from '../../database/sqlite';
 import { LocalAnalyticsProvider } from './LocalAnalyticsProvider';
+import Logger from '../../utils/logger';
 
 const baseInstance = new AnalyticsService();
 let isLocalProviderRegistered = false;

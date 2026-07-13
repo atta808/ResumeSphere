@@ -10,6 +10,7 @@ import RenderHtml from 'react-native-render-html';
 
 import TemplateEngine from '../../services/templates/TemplateEngine';
 import PDFService from '../../services/templates/PDFService';
+import Logger from '../../utils/logger';
 
 const DocumentPreviewScreen = () => {
   const { theme } = useTheme();
@@ -33,7 +34,7 @@ const DocumentPreviewScreen = () => {
       const renderedHtml = await TemplateEngine.render(resumeDataWrapper, theme, {}, doc.templateId || 'StandardDocument');
       setHtmlContent(renderedHtml);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Error', 'Could not load document.');
     }
   }, [documentId, profile, theme]);
@@ -47,7 +48,7 @@ const DocumentPreviewScreen = () => {
       const uri = await PDFService.generatePDF(htmlContent);
       await PDFService.sharePDF(uri);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Export Error', 'Failed to export document.');
     }
   };

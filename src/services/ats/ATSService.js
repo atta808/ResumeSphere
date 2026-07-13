@@ -2,6 +2,7 @@ import ProviderRegistry from './ProviderRegistry';
 import ATSHistoryRepository from '../../repositories/ATSHistoryRepository';
 import ResumeService from '../resume/ResumeService';
 import LocalATSProvider from './LocalATSProvider';
+import Logger from '../../utils/logger';
 
 // Register the default local provider
 ProviderRegistry.registerProvider('LocalATSProvider', LocalATSProvider, true);
@@ -22,7 +23,7 @@ class ATSService {
 
             // If resume hasn't changed since last scan, return cached result
             if (resumeUpdatedAt <= historyCreatedAt && latestHistory.reportData) {
-                console.log('Returning cached ATS report');
+                Logger.info('Returning cached ATS report');
                 return JSON.parse(latestHistory.reportData);
             }
         }
@@ -36,7 +37,7 @@ class ATSService {
 
         return report;
     } catch (error) {
-        console.error('Error analyzing resume:', error);
+        Logger.error('Error analyzing resume:', error);
         throw error;
     }
   }

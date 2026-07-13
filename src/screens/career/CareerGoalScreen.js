@@ -5,6 +5,7 @@ import { PremiumHeader, PremiumButton, PremiumCard, Icon } from '../../component
 import { useTheme } from '../../theme';
 import CareerCoachService from '../../services/career/CareerCoachService';
 import { useProfile } from '../../hooks/useProfile';
+import Logger from '../../utils/logger';
 
 const CareerGoalScreen = () => {
   const { theme } = useTheme();
@@ -54,7 +55,7 @@ const CareerGoalScreen = () => {
       }
       navigation.goBack();
     } catch (error) {
-      console.error('Failed to save goal:', error);
+      Logger.error('Failed to save goal:', error);
       alert('Failed to save career goal');
     } finally {
       setSaving(false);

@@ -5,6 +5,7 @@ import { PremiumHeader, Button, LoadingSpinner } from '../../components/common';
 import { useTheme } from '../../theme';
 import { ROUTES } from '../../navigation/routes';
 import InterviewEngine from '../../services/interview/InterviewEngine';
+import Logger from '../../utils/logger';
 
 const InterviewSessionScreen = () => {
   const { theme } = useTheme();
@@ -35,7 +36,7 @@ const InterviewSessionScreen = () => {
           setStartTime(Date.now());
         }
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         if (isMounted) {
           Alert.alert('Error', 'Failed to initialize interview questions.');
           navigation.goBack();
@@ -76,7 +77,7 @@ const InterviewSessionScreen = () => {
         navigation.replace(ROUTES.INTERVIEW_FEEDBACK, { sessionId });
       }
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       Alert.alert('Error', 'Failed to process answer.');
     } finally {
       setIsSubmitting(false);

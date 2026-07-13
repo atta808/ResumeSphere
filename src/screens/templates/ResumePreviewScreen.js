@@ -9,6 +9,7 @@ import ProfileService from '../../services/profile/ProfileService';
 import TemplateEngine from '../../services/templates/TemplateEngine';
 import PDFService from '../../services/templates/PDFService';
 import { ColorSelector, FontSelector, TemplatePicker } from '../../components/templates';
+import Logger from '../../utils/logger';
 
 const { width } = Dimensions.get('window');
 
@@ -93,7 +94,7 @@ const ResumePreviewScreen = () => {
       const html = await TemplateEngine.render(resumeData, theme, customization, templateId);
       setHtmlContent(html);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       showToast('Error rendering preview', 'error');
     }
   };

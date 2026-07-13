@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { PremiumHeader, PremiumCard } from '../../components/common';
 import { useTheme, spacing, typography } from '../../theme';
 import { DocumentHistoryService } from '../../services/documents';
+import Logger from '../../utils/logger';
 
 const DocumentHistoryScreen = () => {
   const { theme } = useTheme();
@@ -20,7 +21,7 @@ const DocumentHistoryScreen = () => {
         const records = await DocumentHistoryService.getHistory(documentId);
         setHistory(records);
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
       }
     };
     loadHistory();

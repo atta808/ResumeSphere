@@ -5,6 +5,7 @@ import { PremiumHeader, PremiumCard, Icon, EmptyState } from '../../components/c
 import { useTheme } from '../../theme';
 import CareerCoachService from '../../services/career/CareerCoachService';
 import { useProfile } from '../../hooks/useProfile';
+import Logger from '../../utils/logger';
 
 const SalaryInsightScreen = () => {
   const { theme } = useTheme();
@@ -27,7 +28,7 @@ const SalaryInsightScreen = () => {
                  }
             }
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
         } finally {
             setLoading(false);
         }

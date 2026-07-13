@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { PremiumHeader, PremiumCard, Icon } from '../../components/common';
 import { useTheme } from '../../theme';
 import InterviewEngine from '../../services/interview/InterviewEngine';
+import Logger from '../../utils/logger';
 
 const InterviewProgressScreen = () => {
   const { theme } = useTheme();
@@ -21,7 +22,7 @@ const InterviewProgressScreen = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         if (isMounted) setLoading(false);
       }
     };

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { useTheme } from '../../theme';
 import Icon from '../../components/common/Icon';
 import { portfolioService } from '../../services/portfolio/PortfolioService';
+import Logger from '../../utils/logger';
 
 export default function PortfolioAnalyticsScreen() {
   const { theme } = useTheme();
@@ -15,7 +16,7 @@ export default function PortfolioAnalyticsScreen() {
         const rows = await portfolioService.getAnalyticsEvents();
         setEvents(rows);
       } catch (error) {
-        console.error('Error loading analytics:', error);
+        Logger.error('Error loading analytics:', error);
       } finally {
         setLoading(false);
       }

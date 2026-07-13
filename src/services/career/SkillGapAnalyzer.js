@@ -1,5 +1,6 @@
 import AIService from '../ai/AIService';
 import { AI_ACTION_TYPES } from '../../config/ai';
+import Logger from '../../utils/logger';
 
 class SkillGapAnalyzer {
   async analyze(context, sessionId) {
@@ -18,7 +19,7 @@ class SkillGapAnalyzer {
         return { error: 'Failed to parse AI response as JSON.', rawText: response.text };
       }
     } catch (error) {
-      console.error('SkillGapAnalyzer Error:', error);
+      Logger.error('SkillGapAnalyzer Error:', error);
       throw error;
     }
   }

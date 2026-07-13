@@ -2,6 +2,7 @@ import ProviderRegistry from './ProviderRegistry';
 import LocalSalaryProvider from './providers/LocalSalaryProvider';
 import AIService from '../ai/AIService';
 import { AI_ACTION_TYPES } from '../../config/ai';
+import Logger from '../../utils/logger';
 
 class SalaryInsightEngine {
   constructor() {
@@ -26,7 +27,7 @@ class SalaryInsightEngine {
              return await provider.getSalaryInsights(context);
         }
     } catch (e) {
-        console.warn("Salary Provider failed, falling back to AI", e);
+        Logger.warn("Salary Provider failed, falling back to AI", e);
     }
 
     // Fallback to AI
@@ -43,7 +44,7 @@ class SalaryInsightEngine {
         return { error: 'Failed to parse AI response as JSON.', rawText: response.text };
       }
     } catch (error) {
-      console.error('SalaryInsightEngine Error:', error);
+      Logger.error('SalaryInsightEngine Error:', error);
       throw error;
     }
   }

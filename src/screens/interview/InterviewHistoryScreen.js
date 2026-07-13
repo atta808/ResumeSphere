@@ -5,6 +5,7 @@ import { PremiumHeader, PremiumCard, Icon, EmptyState } from '../../components/c
 import { useTheme } from '../../theme';
 import { ROUTES } from '../../navigation/routes';
 import InterviewEngine from '../../services/interview/InterviewEngine';
+import Logger from '../../utils/logger';
 
 const InterviewHistoryScreen = () => {
   const { theme } = useTheme();
@@ -22,7 +23,7 @@ const InterviewHistoryScreen = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         if (isMounted) setLoading(false);
       }
     };
