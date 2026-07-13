@@ -5,7 +5,7 @@ import { ROUTES } from './routes';
 import ResumeDashboardScreen from '../screens/resume/ResumeDashboardScreen';
 import ResumeEditorScreen from '../screens/resume/ResumeEditorScreen';
 import SectionEditorScreen from '../screens/resume/SectionEditorScreen';
-import ResumePreviewScreen from '../screens/resume/ResumePreviewScreen';
+import ResumePreviewScreen from '../screens/templates/ResumePreviewScreen';
 import ATSScoreScreen from '../screens/ats/ATSScoreScreen';
 
 const Stack = createNativeStackNavigator();
