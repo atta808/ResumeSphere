@@ -16,7 +16,7 @@ const ACTION_CARDS = [
   { id: AI_ACTION_TYPES.GENERATE_COVER_LETTER, title: 'Cover Letter', icon: 'document-text-outline', description: 'Generate a personalized cover letter' },
   { id: AI_ACTION_TYPES.PREPARE_INTERVIEW, title: 'Interview Coach', icon: 'chatbubbles-outline', description: 'Practice with tailored mock interviews', isModule: true },
   { id: AI_ACTION_TYPES.SUGGEST_SKILLS, title: 'Skills Suggestions', icon: 'star-outline', description: 'Discover skills you should add' },
-  { id: AI_ACTION_TYPES.CAREER_ADVICE, title: 'Career Advice', icon: 'compass-outline', description: 'Get professional guidance' },
+  { id: 'CAREER_COACH_NAV', title: 'Career Coach', icon: 'compass-outline', description: 'Long-term career planning & roadmap', isModule: true },
 ];
 
 const AIAssistantScreen = () => {
@@ -42,6 +42,8 @@ const AIAssistantScreen = () => {
     if (action.isModule) {
       if (action.id === AI_ACTION_TYPES.PREPARE_INTERVIEW) {
          navigation.navigate(ROUTES.INTERVIEW_NAVIGATOR);
+      } else if (action.id === 'CAREER_COACH_NAV') {
+         navigation.navigate(ROUTES.CAREER_NAVIGATOR);
       }
       return;
     }

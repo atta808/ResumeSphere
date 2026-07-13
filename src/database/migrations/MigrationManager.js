@@ -7,6 +7,7 @@ import { MIGRATION_006 } from './Migration006';
 import { MIGRATION_007 } from './Migration007';
 import { MIGRATION_008 } from './Migration008';
 import { MIGRATION_009 } from './Migration009';
+import { MIGRATION_010 } from './Migration010';
 
 class MigrationManager {
   static async runMigrations(db) {
@@ -35,7 +36,8 @@ class MigrationManager {
         { version: 6, query: MIGRATION_006 },
         { version: 7, query: MIGRATION_007 },
         { version: 8, query: MIGRATION_008 },
-        { version: 9, query: MIGRATION_009 }
+        { version: 9, query: MIGRATION_009 },
+        { version: 10, query: MIGRATION_010 }
         // Future migrations go here
       ];
 

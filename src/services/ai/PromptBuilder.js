@@ -22,6 +22,13 @@ import { NetworkingPrompt } from './prompts/NetworkingPrompt';
 import { SOPPrompt } from './prompts/SOPPrompt';
 import { InterviewQuestionsPrompt } from './prompts/InterviewQuestionsPrompt';
 import { InterviewFeedbackPrompt } from './prompts/InterviewFeedbackPrompt';
+import { CareerRoadmapPrompt } from './prompts/CareerRoadmapPrompt';
+import { SkillGapPrompt } from './prompts/SkillGapPrompt';
+import { LearningPlanPrompt } from './prompts/LearningPlanPrompt';
+import { CertificationPrompt } from './prompts/CertificationPrompt';
+import { PromotionPrompt } from './prompts/PromotionPrompt';
+import { CareerSwitchPrompt } from './prompts/CareerSwitchPrompt';
+import { SalaryPrompt } from './prompts/SalaryPrompt';
 import { AI_ACTION_TYPES } from '../../config/ai';
 
 class PromptBuilder {
@@ -110,6 +117,27 @@ class PromptBuilder {
         break;
       case AI_ACTION_TYPES.ANALYZE_INTERVIEW_ANSWER:
         systemPrompt = InterviewFeedbackPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.GENERATE_CAREER_ROADMAP:
+        systemPrompt = CareerRoadmapPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.ANALYZE_SKILL_GAP:
+        systemPrompt = SkillGapPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.GENERATE_LEARNING_PLAN:
+        systemPrompt = LearningPlanPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.RECOMMEND_CERTIFICATIONS:
+        systemPrompt = CertificationPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.EVALUATE_PROMOTION_READINESS:
+        systemPrompt = PromotionPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.PLAN_CAREER_SWITCH:
+        systemPrompt = CareerSwitchPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.GENERATE_SALARY_INSIGHTS:
+        systemPrompt = SalaryPrompt.build(context);
         break;
       case AI_ACTION_TYPES.GENERIC_CHAT:
       default:
