@@ -57,17 +57,31 @@ export class PortfolioEngine {
   }
 
   async publishPortfolio(portfolioId, resumeData) {
-    // Phase 14: Just prepares the architecture and saves a history snapshot.
-    // Cloud upload is Phase 15.
     const data = await this.portfolioRepo.getById(portfolioId);
     if (!data) throw new Error('Portfolio not found');
+
+    // Generate responsive HTML
+    const htmlContent = this.renderer.generateHTML(resumeData, data.settings, data.portfolio.templateId);
+
+    // Instead of importing CloudService here (which could cause circular deps later),
+    // we assume the top level (PortfolioService or Hook) could handle the cloud service invocation,
+    // or we can invoke it dynamically to avoid cycle issues.
+    let publicUrl = `https://portfolio.resumesphere.app/p/${data.portfolio.portfolioId}`;
+
+    try {
+      const CloudService = require('../cloud/CloudService').default;
+      const result = await CloudService.publishPortfolio(data.portfolio.portfolioId, htmlContent);
+      publicUrl = result.url;
+    } catch(err) {
+      console.warn('Cloud publish failed, using offline fallback URL.', err);
+    }
 
     await this.portfolioRepo.updatePortfolio(portfolioId, { status: 'published' });
     await this.historyService.saveSnapshot(portfolioId, data.portfolio, data.settings);
 
     return {
       status: 'published',
-      url: `https://portfolio.resumesphere.app/p/${data.portfolio.portfolioId}` // Placeholder URL
+      url: publicUrl,
     };
   }
 }

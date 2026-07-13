@@ -1,6 +1,7 @@
 import dbManager from '../database/sqlite';
 import ErrorHandler from '../services/ErrorHandler';
 import { ERROR_CODES } from '../constants/appConstants';
+import OfflineQueueService from '../services/cloud/OfflineQueueService';
 
 class BaseRepository {
   constructor(tableName) {
@@ -50,6 +51,14 @@ class BaseRepository {
       const query = `INSERT INTO ${this.tableName} (${quotedKeys}) VALUES (${placeholders})`;
 
       await this.db.runAsync(query, values);
+
+      // Enqueue sync operation
+      try {
+        await OfflineQueueService.enqueueChange(this.tableName, data.id, 'CREATE', data);
+      } catch (syncErr) {
+        ErrorHandler.logError(syncErr, { context: 'BaseRepository.create.sync' });
+      }
+
       return data;
     } catch (error) {
       throw ErrorHandler.process(error, ERROR_CODES.DATABASE_ERROR);
@@ -66,7 +75,16 @@ class BaseRepository {
       const query = `UPDATE ${this.tableName} SET ${setClause} WHERE id = ?`;
 
       await this.db.runAsync(query, [...values, id]);
-      return await this.findById(id);
+      const updatedData = await this.findById(id);
+
+      // Enqueue sync operation
+      try {
+        await OfflineQueueService.enqueueChange(this.tableName, id, 'UPDATE', updatedData);
+      } catch (syncErr) {
+        ErrorHandler.logError(syncErr, { context: 'BaseRepository.update.sync' });
+      }
+
+      return updatedData;
     } catch (error) {
       throw ErrorHandler.process(error, ERROR_CODES.DATABASE_ERROR);
     }
@@ -83,6 +101,14 @@ class BaseRepository {
       } else {
         await this.db.runAsync(`DELETE FROM ${this.tableName} WHERE id = ?`, [id]);
       }
+
+      // Enqueue sync operation
+      try {
+        await OfflineQueueService.enqueueChange(this.tableName, id, 'DELETE', { id, softDelete });
+      } catch (syncErr) {
+        ErrorHandler.logError(syncErr, { context: 'BaseRepository.delete.sync' });
+      }
+
       return true;
     } catch (error) {
       throw ErrorHandler.process(error, ERROR_CODES.DATABASE_ERROR);
