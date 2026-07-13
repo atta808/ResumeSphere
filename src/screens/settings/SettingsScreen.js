@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { PremiumHeader, PremiumCard, PremiumButton, Divider } from '../../components/common';
 import { useTheme } from '../../theme';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from '../../navigation/routes';
 
 const SettingsScreen = () => {
+  const navigation = useNavigation();
   const { theme, themeMode, setThemeMode } = useTheme();
 
   const toggleTheme = () => {
@@ -28,16 +31,31 @@ const SettingsScreen = () => {
           </View>
         </PremiumCard>
 
-        <Text style={[styles.sectionTitle, { color: theme.textSecondary, marginTop: 24 }]}>Account (Coming Soon)</Text>
+        <Text style={[styles.sectionTitle, { color: theme.textSecondary, marginTop: 24 }]}>Account & Cloud</Text>
         <PremiumCard style={styles.card}>
           <View style={styles.row}>
-            <Text style={[styles.label, { color: theme.textPrimary }]}>Profile</Text>
-            <Text style={{ color: theme.textSecondary }}>Setup later</Text>
+            <Text style={[styles.label, { color: theme.textPrimary }]}>Account</Text>
+            <PremiumButton title="Manage" variant="ghost" size="small" onPress={() => navigation.navigate(ROUTES.ACCOUNT)} />
           </View>
           <Divider style={{ marginVertical: 12 }} />
           <View style={styles.row}>
-            <Text style={[styles.label, { color: theme.textPrimary }]}>Subscription</Text>
-            <Text style={{ color: theme.textSecondary }}>Free</Text>
+            <Text style={[styles.label, { color: theme.textPrimary }]}>Cloud Sync</Text>
+            <PremiumButton title="View" variant="ghost" size="small" onPress={() => navigation.navigate(ROUTES.CLOUD_SYNC)} />
+          </View>
+          <Divider style={{ marginVertical: 12 }} />
+          <View style={styles.row}>
+            <Text style={[styles.label, { color: theme.textPrimary }]}>Backup & Restore</Text>
+            <PremiumButton title="View" variant="ghost" size="small" onPress={() => navigation.navigate(ROUTES.BACKUP_RESTORE)} />
+          </View>
+          <Divider style={{ marginVertical: 12 }} />
+          <View style={styles.row}>
+            <Text style={[styles.label, { color: theme.textPrimary }]}>Connected Devices</Text>
+            <PremiumButton title="View" variant="ghost" size="small" onPress={() => navigation.navigate(ROUTES.CONNECTED_DEVICES)} />
+          </View>
+          <Divider style={{ marginVertical: 12 }} />
+          <View style={styles.row}>
+            <Text style={[styles.label, { color: theme.textPrimary }]}>Privacy & Security</Text>
+            <PremiumButton title="View" variant="ghost" size="small" onPress={() => navigation.navigate(ROUTES.PRIVACY_SECURITY)} />
           </View>
         </PremiumCard>
 
