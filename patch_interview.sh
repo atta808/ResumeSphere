@@ -1,3 +1,4 @@
+cat << 'INNER_EOF' > src/services/ai/ResponseParser.js
 class ResponseParser {
   /**
    * Normalizes the AI output into a standard format.
@@ -29,3 +30,8 @@ class ResponseParser {
 }
 
 export default new ResponseParser();
+INNER_EOF
+
+sed -i 's/const completedAt = new Date().toISOString();/const completedAt = new Date().toISOString();\n    const duration = answers.reduce((total, ans) => total + (ans.timeSpent || 0), 0);/' src/services/interview/InterviewService.js
+sed -i 's/`UPDATE interview_sessions SET status = '"'"'completed'"'"', completedAt = ?, overallScore = ? WHERE id = ?`/`UPDATE interview_sessions SET status = '"'"'completed'"'"', completedAt = ?, overallScore = ?, duration = ? WHERE id = ?`/' src/services/interview/InterviewService.js
+sed -i 's/\[completedAt, overallScore, sessionId\]/\[completedAt, overallScore, duration, sessionId\]/' src/services/interview/InterviewService.js

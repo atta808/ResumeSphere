@@ -87,7 +87,12 @@ class AIService {
     const context = await this.buildContext(profileId, resumeId);
 
     if (jobDescriptionContext) {
-      context.jobDescription = jobDescriptionContext;
+      // In cases like INTERVIEW_COACH, jobDescriptionContext might hold the entire interview context
+      if (actionType === AI_ACTION_TYPES.GENERATE_INTERVIEW_QUESTIONS || actionType === AI_ACTION_TYPES.ANALYZE_INTERVIEW_ANSWER) {
+         Object.assign(context, jobDescriptionContext);
+      } else {
+        context.jobDescription = jobDescriptionContext;
+      }
     }
 
     // 1. Log the user's prompt in history

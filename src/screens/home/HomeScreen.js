@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
           <HomeCard
             title="Interview Prep"
             icon="microphone-outline"
-            onPress={() => navigation.navigate(ROUTES.INTERVIEW_PREP)}
+            onPress={() => navigation.navigate(ROUTES.INTERVIEW_NAVIGATOR)}
             theme={theme}
           />
           <HomeCard
