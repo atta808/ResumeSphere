@@ -273,3 +273,57 @@ export const createCustomSection = (data = {}) => {
     deletedAt: data.deletedAt || null,
   };
 };
+
+export const createInterviewSession = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    resumeId: data.resumeId || null,
+    profileId: data.profileId || null,
+    jobDescriptionId: data.jobDescriptionId || null,
+    interviewType: sanitizeString(data.interviewType),
+    difficulty: sanitizeString(data.difficulty),
+    companyName: sanitizeString(data.companyName),
+    position: sanitizeString(data.position),
+    status: sanitizeString(data.status) || 'in_progress', // in_progress, completed
+    startedAt: data.startedAt || now,
+    completedAt: data.completedAt || null,
+    duration: data.duration || 0,
+    overallScore: data.overallScore || 0,
+    createdAt: data.createdAt || now,
+    updatedAt: now,
+  };
+};
+
+export const createInterviewQuestion = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    sessionId: data.sessionId || null,
+    questionNumber: data.questionNumber || 1,
+    question: sanitizeString(data.question),
+    questionType: sanitizeString(data.questionType) || 'open_text',
+    difficulty: sanitizeString(data.difficulty),
+    category: sanitizeString(data.category),
+    expectedSkills: Array.isArray(data.expectedSkills) ? data.expectedSkills : [],
+    createdAt: data.createdAt || now,
+  };
+};
+
+export const createInterviewAnswer = (data = {}) => {
+  const now = new Date().toISOString();
+  return {
+    id: data.id || generateUUID(),
+    questionId: data.questionId || null,
+    sessionId: data.sessionId || null,
+    answer: sanitizeString(data.answer),
+    feedback: typeof data.feedback === 'object' ? data.feedback : {},
+    score: data.score || 0,
+    strengths: Array.isArray(data.strengths) ? data.strengths : [],
+    weaknesses: Array.isArray(data.weaknesses) ? data.weaknesses : [],
+    recommendations: Array.isArray(data.recommendations) ? data.recommendations : [],
+    estimatedImprovement: data.estimatedImprovement || 0,
+    timeSpent: data.timeSpent || 0,
+    createdAt: data.createdAt || now,
+  };
+};

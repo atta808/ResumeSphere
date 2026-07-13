@@ -8,6 +8,7 @@ import { ROUTES } from './routes';
 import WelcomeScreen from '../screens/welcome/WelcomeScreen';
 import MainTabNavigator from './MainTabNavigator';
 import DocumentNavigator from './DocumentNavigator';
+import InterviewNavigator from './InterviewNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ const RootNavigator = () => {
         <Stack.Screen name={ROUTES.WELCOME} component={WelcomeScreen} />
         <Stack.Screen name={ROUTES.MAIN_TABS} component={MainTabNavigator} />
         <Stack.Screen name={ROUTES.DOCUMENT_NAVIGATOR} component={DocumentNavigator} />
+        <Stack.Screen name={ROUTES.INTERVIEW_NAVIGATOR} component={InterviewNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

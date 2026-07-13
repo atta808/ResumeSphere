@@ -20,6 +20,8 @@ import { ResignationPrompt } from './prompts/ResignationPrompt';
 import { RecommendationPrompt } from './prompts/RecommendationPrompt';
 import { NetworkingPrompt } from './prompts/NetworkingPrompt';
 import { SOPPrompt } from './prompts/SOPPrompt';
+import { InterviewQuestionsPrompt } from './prompts/InterviewQuestionsPrompt';
+import { InterviewFeedbackPrompt } from './prompts/InterviewFeedbackPrompt';
 import { AI_ACTION_TYPES } from '../../config/ai';
 
 class PromptBuilder {
@@ -102,6 +104,12 @@ class PromptBuilder {
       case AI_ACTION_TYPES.GENERATE_INTERNSHIP_REQUEST:
       case AI_ACTION_TYPES.GENERATE_SCHOLARSHIP:
         systemPrompt = CoverLetterPrompt(context); // Alias for now
+        break;
+      case AI_ACTION_TYPES.GENERATE_INTERVIEW_QUESTIONS:
+        systemPrompt = InterviewQuestionsPrompt.build(context);
+        break;
+      case AI_ACTION_TYPES.ANALYZE_INTERVIEW_ANSWER:
+        systemPrompt = InterviewFeedbackPrompt.build(context);
         break;
       case AI_ACTION_TYPES.GENERIC_CHAT:
       default:

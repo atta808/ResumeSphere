@@ -14,7 +14,7 @@ const ACTION_CARDS = [
   { id: AI_ACTION_TYPES.IMPROVE_RESUME, title: 'Improve Resume', icon: 'trending-up-outline', description: 'Get suggestions for your resume' },
   { id: AI_ACTION_TYPES.REWRITE_EXPERIENCE, title: 'Rewrite Experience', icon: 'briefcase-outline', description: 'Make bullet points stronger' },
   { id: AI_ACTION_TYPES.GENERATE_COVER_LETTER, title: 'Cover Letter', icon: 'document-text-outline', description: 'Generate a personalized cover letter' },
-  { id: AI_ACTION_TYPES.PREPARE_INTERVIEW, title: 'Interview Prep', icon: 'chatbubbles-outline', description: 'Practice with tailored questions' },
+  { id: AI_ACTION_TYPES.PREPARE_INTERVIEW, title: 'Interview Coach', icon: 'chatbubbles-outline', description: 'Practice with tailored mock interviews', isModule: true },
   { id: AI_ACTION_TYPES.SUGGEST_SKILLS, title: 'Skills Suggestions', icon: 'star-outline', description: 'Discover skills you should add' },
   { id: AI_ACTION_TYPES.CAREER_ADVICE, title: 'Career Advice', icon: 'compass-outline', description: 'Get professional guidance' },
 ];
@@ -39,6 +39,13 @@ const AIAssistantScreen = () => {
   );
 
   const handleActionPress = (action) => {
+    if (action.isModule) {
+      if (action.id === AI_ACTION_TYPES.PREPARE_INTERVIEW) {
+         navigation.navigate(ROUTES.INTERVIEW_NAVIGATOR);
+      }
+      return;
+    }
+
     if (!resumes || resumes.length === 0) {
       // Need at least one resume context (could alternatively navigate to create one)
       alert("Please create a resume first to use AI features.");
