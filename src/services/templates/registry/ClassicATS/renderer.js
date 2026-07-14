@@ -1,4 +1,4 @@
-import SectionRenderer from '../SectionRenderer';
+import SectionRenderer from '../../SectionRenderer';
 
 export default function render(resume, customization) {
   const { profile = {}, experience = [], education = [], skills = [] } = resume || {};

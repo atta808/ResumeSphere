@@ -146,7 +146,7 @@ class PromptBuilder {
     }
 
     if (userMessage) {
-      return \`\${systemPrompt}\n\nUSER REQUEST: \${userMessage}\`;
+      return `${systemPrompt}\n\nUSER REQUEST: ${userMessage}`;
     }
 
     return systemPrompt;

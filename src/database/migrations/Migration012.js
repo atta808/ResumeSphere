@@ -1,4 +1,4 @@
-export const MIGRATION_012 = \`
+export const MIGRATION_012 = `
   CREATE TABLE IF NOT EXISTS sync_metadata (
     id TEXT PRIMARY KEY,
     entityType TEXT NOT NULL,
@@ -68,4 +68,4 @@ export const MIGRATION_012 = \`
     duration INTEGER,
     createdAt TEXT NOT NULL
   );
-\`;
+`;

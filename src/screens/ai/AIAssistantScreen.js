@@ -69,7 +69,7 @@ const AIAssistantScreen = () => {
       actionType: action.id,
       resumeId: resume.id,
       profileId: profile.id,
-      title: \`\${action.title} - \${resume.resumeName || 'Resume'}\`
+      title: `${action.title} - ${resume.resumeName || 'Resume'}`
     });
   };
 

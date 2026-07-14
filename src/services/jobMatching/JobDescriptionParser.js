@@ -12,7 +12,7 @@ class JobDescriptionParser {
     // In a production scenario, you would use regex or NLP,
     // or eventually pass the raw text to an AI parser.
     const extractSection = (keyword) => {
-      const regex = new RegExp(\`\${keyword}s?:?\\s*([\\s\\S]*?)(?=(?:\\n\\n|[A-Z][a-z]+s?:|\\Z))\`, 'i');
+      const regex = new RegExp(`${keyword}s?:?\\s*([\\s\\S]*?)(?=(?:\\n\\n|[A-Z][a-z]+s?:|\\Z))`, 'i');
       const match = text.match(regex);
       return match && match[1] ? match[1].trim() : '';
     };

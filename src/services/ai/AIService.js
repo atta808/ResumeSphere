@@ -102,7 +102,7 @@ class AIService {
       await AIHistoryService.addMessage(sessionId, 'user', userMessage, { actionType });
     } else {
       // If no explicit user message, log a system-generated action event
-      await AIHistoryService.addMessage(sessionId, 'user', \`Action Requested: \${actionType}\`, { actionType });
+      await AIHistoryService.addMessage(sessionId, 'user', `Action Requested: ${actionType}`, { actionType });
     }
 
     // 2. Build Prompt (Gather context and assemble instructions)
@@ -113,7 +113,7 @@ class AIService {
 
     // 4. Call Provider
     const aiResponse = await provider.generateCompletion(
-       userMessage || \`Execute \${actionType}\`,
+       userMessage || `Execute ${actionType}`,
        systemPrompt,
        abortSignal
     );

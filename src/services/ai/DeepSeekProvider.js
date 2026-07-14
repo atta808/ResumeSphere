@@ -30,7 +30,7 @@ class DeepSeekProvider extends BaseAIProvider {
 
         attempt++;
         if (attempt >= this.config.retryCount) {
-          throw new Error(\`DeepSeek API Error: \${error.message}\`);
+          throw new Error(`DeepSeek API Error: ${error.message}`);
         }
 
         // Exponential backoff
@@ -56,11 +56,11 @@ class DeepSeekProvider extends BaseAIProvider {
     }
 
     try {
-      const response = await fetch(\`\${this.config.baseUrl}/chat/completions\`, {
+      const response = await fetch(`${this.config.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': \`Bearer \${ENV.DEEPSEEK_API_KEY}\`,
+          'Authorization': `Bearer ${ENV.DEEPSEEK_API_KEY}`,
         },
         body: JSON.stringify({
           model: this.config.defaultModel,
@@ -73,7 +73,7 @@ class DeepSeekProvider extends BaseAIProvider {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => null);
-        throw new Error(errorData?.error?.message || \`HTTP error! status: \${response.status}\`);
+        throw new Error(errorData?.error?.message || `HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -104,7 +104,7 @@ class DeepSeekProvider extends BaseAIProvider {
   }
 
   async improveSection(sectionContent) {
-    return this.generateCompletion(\`Improve this section: \${sectionContent}\`);
+    return this.generateCompletion(`Improve this section: ${sectionContent}`);
   }
 }
 
