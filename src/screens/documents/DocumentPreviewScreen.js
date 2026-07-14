@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, StyleSheet, ScrollView, Alert, useWindowDimensions, Text } from 'react-native';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { View, StyleSheet, Alert, useWindowDimensions, ActivityIndicator, Platform } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { PremiumHeader, PremiumButton, Icon } from '../../components/common';
+import { WebView } from 'react-native-webview';
+import { PremiumHeader, PremiumButton } from '../../components/common';
 import { useTheme, spacing } from '../../theme';
 import { ROUTES } from '../../navigation/routes';
 import { DocumentService } from '../../services/documents';
 import { useProfile } from '../../hooks/useProfile';
-import RenderHtml from 'react-native-render-html';
 
 import TemplateEngine from '../../services/templates/TemplateEngine';
 import PDFService from '../../services/templates/PDFService';
@@ -22,10 +22,14 @@ const DocumentPreviewScreen = () => {
 
   const [document, setDocument] = useState(null);
   const [htmlContent, setHtmlContent] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  const webviewRef = useRef(null);
 
   const loadDocument = useCallback(async () => {
     if (!documentId) return;
     try {
+      setLoading(true);
       const doc = await DocumentService.getDocumentById(documentId);
       setDocument(doc);
 
@@ -36,6 +40,8 @@ const DocumentPreviewScreen = () => {
     } catch (error) {
       Logger.error(error);
       Alert.alert('Error', 'Could not load document.');
+    } finally {
+      setLoading(false);
     }
   }, [documentId, profile, theme]);
 
@@ -53,27 +59,35 @@ const DocumentPreviewScreen = () => {
     }
   };
 
-  if (!document) return <View style={[styles.container, { backgroundColor: theme.background }]} />;
-
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <PremiumHeader
-        title={document.title}
+        title={document?.title || "Document Preview"}
         showBackButton
         onBackPress={() => navigation.goBack()}
         rightIcon="pencil"
         onRightIconPress={() => navigation.navigate(ROUTES.DOCUMENT_EDITOR, { documentId })}
       />
 
-      <ScrollView style={styles.content}>
-        <View style={[styles.paper, { backgroundColor: '#fff', minHeight: width * 1.4 }]}>
-           <RenderHtml
-              contentWidth={width - 32}
-              source={{ html: htmlContent }}
-              baseStyle={{ color: '#000' }}
-           />
+      <View style={styles.workspace}>
+        <View style={styles.previewContainer}>
+          {loading || !htmlContent ? (
+            <ActivityIndicator size="large" color={theme.primary} style={{ marginTop: 20 }} />
+          ) : (
+            <View style={styles.webviewWrapper}>
+              <WebView
+                ref={webviewRef}
+                source={{ html: htmlContent }}
+                style={styles.webview}
+                scalesPageToFit={Platform.OS === 'android'}
+                bounces={false}
+                scrollEnabled={true}
+                showsVerticalScrollIndicator={true}
+              />
+            </View>
+          )}
         </View>
-      </ScrollView>
+      </View>
 
       <View style={[styles.footer, { backgroundColor: theme.surface, borderTopColor: theme.border }]}>
         <PremiumButton
@@ -87,17 +101,34 @@ const DocumentPreviewScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  content: { flex: 1, padding: spacing.md },
-  paper: {
-    padding: spacing.lg,
-    borderRadius: 8,
+  container: {
+    flex: 1,
+  },
+  workspace: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  previewContainer: {
+    flex: 1,
+    backgroundColor: '#e5e7eb',
+    padding: spacing.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  webviewWrapper: {
+    width: '100%',
+    height: '100%',
+    maxWidth: 800,
+    backgroundColor: '#fff',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    marginBottom: spacing.xl,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  webview: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
   footer: {
     padding: spacing.md,
