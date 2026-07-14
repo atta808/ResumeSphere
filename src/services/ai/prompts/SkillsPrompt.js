@@ -1,10 +1,10 @@
 export const SkillsPrompt = (context) => {
-  return \`You are an expert career advisor.
+  return `You are an expert career advisor.
 
 CURRENT SKILLS:
-\${context.skills ? JSON.stringify(context.skills, null, 2) : 'No skills provided.'}
+${context.skills ? JSON.stringify(context.skills, null, 2) : 'No skills provided.'}
 
-TARGET JOB TITLE: \${context.resume?.targetJobTitle || 'Not specified'}
+TARGET JOB TITLE: ${context.resume?.targetJobTitle || 'Not specified'}
 
 INSTRUCTIONS:
 Analyze the user's current skills against industry standards for the target job title.
@@ -14,5 +14,5 @@ Suggest:
 3. Relevant soft skills.
 
 Format the output clearly as a categorized list.
-\`;
+`;
 };

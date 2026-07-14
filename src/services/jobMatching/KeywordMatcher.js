@@ -33,10 +33,10 @@ class KeywordMatcher {
     // Flatten all text in the resume/profile
     const allText = [
       profile.summary || '',
-      ...(profile.experience || []).map(e => \`\${e.position} \${e.description}\`),
+      ...(profile.experience || []).map(e => `${e.position} ${e.description}`),
       ...(profile.skills || []).map(s => s.name),
-      ...(profile.education || []).map(e => \`\${e.degree} \${e.fieldOfStudy} \${e.description}\`),
-      ...(profile.projects || []).map(p => \`\${p.name} \${p.description}\`)
+      ...(profile.education || []).map(e => `${e.degree} ${e.fieldOfStudy} ${e.description}`),
+      ...(profile.projects || []).map(p => `${p.name} ${p.description}`)
     ].join(' ').toLowerCase();
 
     const matched = [];
@@ -44,7 +44,7 @@ class KeywordMatcher {
 
     targetKeywords.forEach(keyword => {
       // Basic exact substring match (or regex word boundary)
-      const regex = new RegExp(\`\\\\b\${keyword.replace(/[-/\\\\^$*+?.()|[]{}]/g, '\\\\$&')}\\\\b\`, 'i');
+      const regex = new RegExp(`\\\\b${keyword.replace(/[-/\\\\^$*+?.()|[]{}]/g, '\\\\$&')}\\\\b`, 'i');
       if (regex.test(allText)) {
         matched.push(keyword);
       } else {

@@ -1,9 +1,9 @@
 import * as Crypto from 'expo-crypto';
-import DatabaseService from '../../database/DatabaseService';
+import SQLiteService from '../../database/sqlite';
 
 class CareerRepository {
   async getDb() {
-    return DatabaseService.getDb();
+    return SQLiteService.db;
   }
 
   // --- Goals ---

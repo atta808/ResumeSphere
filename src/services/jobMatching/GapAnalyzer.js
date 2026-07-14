@@ -25,7 +25,7 @@ class GapAnalyzer {
       gaps.push({
         type: 'Experience Gap',
         severity: 'High',
-        details: \`Requires \${results.experience.required} years, found \${results.experience.yearsFound}.\`
+        details: `Requires ${results.experience.required} years, found ${results.experience.yearsFound}.`
       });
     }
 

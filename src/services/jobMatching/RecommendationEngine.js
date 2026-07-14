@@ -6,7 +6,7 @@ class RecommendationEngine {
       if (gap.type === 'Missing Skills') {
         recommendations.push({
           title: 'Add Missing Skills',
-          description: \`Add the following skills if you have them: \${gap.details}\`,
+          description: `Add the following skills if you have them: ${gap.details}`,
           reason: 'Matches required skills in job description.',
           estimatedScoreGain: 10,
           futureAiAction: 'TAILOR_SKILLS'
