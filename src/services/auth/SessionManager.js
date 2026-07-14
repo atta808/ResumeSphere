@@ -1,7 +1,6 @@
-import * as SecureStore from 'expo-secure-store';
+import { SECURE_STORE_KEYS } from '../../config/secureStore';
+import { setSecureItem, getSecureItem, deleteSecureItem } from '../../utils/secureStoreWrapper';
 import TokenManager from './TokenManager';
-
-const SESSION_KEY = '@auth_session';
 
 class SessionManager {
   constructor() {
@@ -10,13 +9,13 @@ class SessionManager {
 
   async saveSession(user) {
     this.currentUser = user;
-    await SecureStore.setItemAsync(SESSION_KEY, JSON.stringify(user));
+    await setSecureItem(SECURE_STORE_KEYS.USER_SESSION, JSON.stringify(user));
   }
 
   async restoreSession() {
-    const sessionStr = await SecureStore.getItemAsync(SESSION_KEY);
-    if (sessionStr) {
-      this.currentUser = JSON.parse(sessionStr);
+    const response = await getSecureItem(SECURE_STORE_KEYS.USER_SESSION);
+    if (response.success && response.value) {
+      this.currentUser = JSON.parse(response.value);
       // Ensure tokens are still valid/present
       const hasTokens = await TokenManager.hasValidTokens();
       if (!hasTokens) {
@@ -28,7 +27,7 @@ class SessionManager {
 
   async clearSession() {
     this.currentUser = null;
-    await SecureStore.deleteItemAsync(SESSION_KEY);
+    await deleteSecureItem(SECURE_STORE_KEYS.USER_SESSION);
   }
 
   getCurrentUser() {

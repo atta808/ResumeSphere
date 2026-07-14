@@ -22,7 +22,7 @@ export const useResumes = () => {
     }
   }, []);
 
-  const searchResumes = async (query) => {
+  const searchResumes = useCallback(async (query) => {
     setLoading(true);
     try {
       const data = await ResumeService.searchResumes(query);
@@ -32,9 +32,9 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
 
-  const createResume = async (resumeData) => {
+  const createResume = useCallback(async (resumeData) => {
     try {
       setLoading(true);
       const created = await ResumeService.createResume(resumeData);
@@ -46,9 +46,9 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const duplicateResume = async (id, newName) => {
+  const duplicateResume = useCallback(async (id, newName) => {
     try {
       setLoading(true);
       const duplicated = await ResumeService.duplicateResume(id, newName);
@@ -60,9 +60,9 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const updateResume = async (id, data) => {
+  const updateResume = useCallback(async (id, data) => {
     try {
       setLoading(true);
       const updated = await ResumeService.updateResume(id, data);
@@ -74,9 +74,9 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const archiveResume = async (id, isArchived) => {
+  const archiveResume = useCallback(async (id, isArchived) => {
     try {
       setLoading(true);
       const updated = await ResumeService.toggleArchiveResume(id, isArchived);
@@ -88,9 +88,9 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const deleteResume = async (id) => {
+  const deleteResume = useCallback(async (id) => {
     try {
       setLoading(true);
       await ResumeService.deleteResume(id);
@@ -101,7 +101,7 @@ export const useResumes = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     resumes,

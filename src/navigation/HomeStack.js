@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={ROUTES.HOME} component={HomeScreen} />
+      <Stack.Screen name={ROUTES.HOME_SCREEN} component={HomeScreen} />
       <Stack.Screen name={ROUTES.ATS_SCORE} component={ATSScoreScreen} />
       <Stack.Screen name={ROUTES.COVER_LETTER} component={CoverLetterScreen} />
       <Stack.Screen name={ROUTES.INTERVIEW_PREP} component={InterviewPrepScreen} />

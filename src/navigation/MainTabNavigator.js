@@ -25,15 +25,15 @@ const MainTabNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === ROUTES.HOME) {
+          if (route.name === ROUTES.HOME_TAB) {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === ROUTES.RESUME) {
+          } else if (route.name === ROUTES.RESUME_TAB) {
             iconName = focused ? 'file-document' : 'file-document-outline';
-          } else if (route.name === ROUTES.AI_ASSISTANT) {
+          } else if (route.name === ROUTES.AI_TAB) {
             iconName = focused ? 'robot' : 'robot-outline';
-          } else if (route.name === ROUTES.TEMPLATES) {
+          } else if (route.name === ROUTES.TEMPLATES_TAB) {
             iconName = focused ? 'view-grid' : 'view-grid-outline';
-          } else if (route.name === ROUTES.SETTINGS) {
+          } else if (route.name === ROUTES.SETTINGS_TAB) {
             iconName = focused ? 'cog' : 'cog-outline';
           }
 
@@ -66,27 +66,27 @@ const MainTabNavigator = () => {
       })}
     >
       <Tab.Screen
-        name={ROUTES.HOME}
+        name={ROUTES.HOME_TAB}
         component={HomeStack}
         options={{ tabBarLabel: 'Home' }}
       />
       <Tab.Screen
-        name={ROUTES.RESUME}
+        name={ROUTES.RESUME_TAB}
         component={ResumeStack}
         options={{ tabBarLabel: 'Resume' }}
       />
       <Tab.Screen
-        name={ROUTES.AI_ASSISTANT}
+        name={ROUTES.AI_TAB}
         component={AIStack}
         options={{ tabBarLabel: 'AI Chat' }}
       />
       <Tab.Screen
-        name={ROUTES.TEMPLATES}
+        name={ROUTES.TEMPLATES_TAB}
         component={TemplateStack}
         options={{ tabBarLabel: 'Templates' }}
       />
       <Tab.Screen
-        name={ROUTES.SETTINGS}
+        name={ROUTES.SETTINGS_TAB}
         component={SettingsStack}
         options={{ tabBarLabel: 'Settings' }}
       />

@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const SettingsStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={ROUTES.SETTINGS} component={SettingsScreen} />
+      <Stack.Screen name={ROUTES.SETTINGS_SCREEN} component={SettingsScreen} />
       <Stack.Screen name={ROUTES.ACCOUNT} component={AccountScreen} />
       <Stack.Screen name={ROUTES.CLOUD_SYNC} component={SyncDashboardScreen} />
       <Stack.Screen name={ROUTES.BACKUP_RESTORE} component={BackupRestoreScreen} />

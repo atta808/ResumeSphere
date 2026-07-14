@@ -23,7 +23,7 @@ const AIAssistantScreen = () => {
   const { theme } = useTheme();
   const navigation = useNavigation();
   const { profile } = useProfile();
-  const { resumes, fetchResumes } = useResumes();
+  const { resumes, loadResumes } = useResumes();
   const { sessions, fetchSessions } = useAIHistory(profile?.id);
 
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -31,11 +31,11 @@ const AIAssistantScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-      fetchResumes();
+      loadResumes();
       if (profile?.id) {
         fetchSessions();
       }
-    }, [profile?.id, fetchResumes, fetchSessions])
+    }, [profile?.id, loadResumes, fetchSessions])
   );
 
   const handleActionPress = (action) => {

@@ -35,7 +35,7 @@ const ATSScoreScreen = () => {
 
   const handleImproveWithAI = () => {
      // For future: navigate to AI with context or show options
-     navigation.navigate(ROUTES.AI_ASSISTANT);
+     navigation.navigate(ROUTES.AI_TAB);
   };
 
   const renderSkeleton = () => (
@@ -68,7 +68,7 @@ const ATSScoreScreen = () => {
             title="Select a Resume"
             subtitle="You must select a resume to analyze its ATS score."
             icon="file-document-outline"
-            actionButton={<PremiumButton title="Go to Resumes" onPress={() => navigation.navigate(ROUTES.RESUME)} />}
+            actionButton={<PremiumButton title="Go to Resumes" onPress={() => navigation.navigate(ROUTES.RESUME_TAB)} />}
           />
         </View>
       );
