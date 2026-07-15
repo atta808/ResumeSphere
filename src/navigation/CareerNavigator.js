@@ -10,12 +10,29 @@ import PromotionReadinessScreen from '../screens/career/PromotionReadinessScreen
 import CareerProgressScreen from '../screens/career/CareerProgressScreen';
 import CareerRecommendationScreen from '../screens/career/CareerRecommendationScreen';
 import { ROUTES } from './routes';
+import { ScreenWrapper } from '../components/common';
 
 const Stack = createNativeStackNavigator();
 
 const CareerNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        screenLayout: ({ children, route, options }) => {
+          return (
+            <ScreenWrapper
+              safeTop={options.safeTop}
+              safeBottom={options.safeBottom}
+              keyboardAware={options.keyboardAware}
+              backgroundColor={options.backgroundColor}
+            >
+              {children}
+            </ScreenWrapper>
+          );
+        }
+      }}
+    >
       <Stack.Screen name={ROUTES.CAREER_DASHBOARD} component={CareerDashboardScreen} />
       <Stack.Screen name={ROUTES.CAREER_GOAL} component={CareerGoalScreen} />
       <Stack.Screen name={ROUTES.CAREER_ROADMAP} component={CareerRoadmapScreen} />

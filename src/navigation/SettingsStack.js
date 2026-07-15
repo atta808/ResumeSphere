@@ -7,12 +7,29 @@ import BackupRestoreScreen from '../screens/settings/BackupRestoreScreen';
 import ConnectedDevicesScreen from '../screens/settings/ConnectedDevicesScreen';
 import PrivacySecurityScreen from '../screens/settings/PrivacySecurityScreen';
 import { ROUTES } from './routes';
+import { ScreenWrapper } from '../components/common';
 
 const Stack = createNativeStackNavigator();
 
 const SettingsStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        screenLayout: ({ children, route, options }) => {
+          return (
+            <ScreenWrapper
+              safeTop={options.safeTop}
+              safeBottom={options.safeBottom}
+              keyboardAware={options.keyboardAware}
+              backgroundColor={options.backgroundColor}
+            >
+              {children}
+            </ScreenWrapper>
+          );
+        }
+      }}
+    >
       <Stack.Screen name={ROUTES.SETTINGS_SCREEN} component={SettingsScreen} />
       <Stack.Screen name={ROUTES.ACCOUNT} component={AccountScreen} />
       <Stack.Screen name={ROUTES.CLOUD_SYNC} component={SyncDashboardScreen} />

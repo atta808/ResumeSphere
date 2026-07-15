@@ -7,18 +7,35 @@ import InterviewPrepScreen from '../screens/interview/InterviewPrepScreen';
 import ImportScreen from '../screens/import/ImportScreen';
 import ImportReviewScreen from '../screens/import/ImportReviewScreen';
 import { ROUTES } from './routes';
+import { ScreenWrapper } from '../components/common';
 
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        screenLayout: ({ children, route, options }) => {
+          return (
+            <ScreenWrapper
+              safeTop={options.safeTop}
+              safeBottom={options.safeBottom}
+              keyboardAware={options.keyboardAware}
+              backgroundColor={options.backgroundColor}
+            >
+              {children}
+            </ScreenWrapper>
+          );
+        }
+      }}
+    >
       <Stack.Screen name={ROUTES.HOME_SCREEN} component={HomeScreen} />
       <Stack.Screen name={ROUTES.ATS_SCORE} component={ATSScoreScreen} />
       <Stack.Screen name={ROUTES.COVER_LETTER} component={CoverLetterScreen} />
       <Stack.Screen name={ROUTES.INTERVIEW_PREP} component={InterviewPrepScreen} />
-      <Stack.Screen name={ROUTES.IMPORT_MENU} component={ImportScreen} />
-      <Stack.Screen name={ROUTES.IMPORT_REVIEW} component={ImportReviewScreen} />
+      <Stack.Screen name={ROUTES.IMPORT_MENU} component={ImportScreen} options={{ safeTop: true }} />
+      <Stack.Screen name={ROUTES.IMPORT_REVIEW} component={ImportReviewScreen} options={{ safeTop: true }} />
     </Stack.Navigator>
   );
 };
