@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from './Icon';
 import { useTheme } from '../../theme/ThemeContext';
 import { spacing, typography } from '../../theme';
@@ -13,12 +14,19 @@ const PremiumHeader = ({
   themeAware = true,
 }) => {
   const { theme } = useTheme();
-  // We handle Safe Area implicitly by expecting this to be used within a SafeAreaView,
-  // or we can add optional padding. For robustness without installing an extra package right now,
-  // we will just use padding if provided or assume container handles it.
+  const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, { backgroundColor: themeAware ? theme.surface : 'transparent', borderBottomColor: themeAware ? theme.divider : 'transparent' }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: themeAware ? theme.surface : 'transparent',
+          borderBottomColor: themeAware ? theme.divider : 'transparent',
+          paddingTop: insets.top + spacing.sm // Add safe area top inset
+        }
+      ]}
+    >
       <View style={styles.leftContainer}>
         {onBack && (
           <TouchableOpacity onPress={onBack} style={styles.actionButton} accessibilityLabel="Go back">
@@ -50,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingBottom: spacing.sm, // Changed from paddingVertical to separate top and bottom
     borderBottomWidth: 1,
   },
   leftContainer: {

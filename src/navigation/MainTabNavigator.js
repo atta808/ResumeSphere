@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Icon } from '../components/common';
+import { Icon, ScreenWrapper } from '../components/common';
 import { useTheme } from '../theme';
 import { ROUTES } from './routes';
 
@@ -22,6 +22,18 @@ const MainTabNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
+        screenLayout: ({ children, options }) => {
+          return (
+            <ScreenWrapper
+              safeTop={options.safeTop}
+              safeBottom={options.safeBottom}
+              keyboardAware={options.keyboardAware}
+              backgroundColor={options.backgroundColor}
+            >
+              {children}
+            </ScreenWrapper>
+          );
+        },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 

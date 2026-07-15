@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '../theme';
+import { ScreenWrapper } from '../components/common';
 import { navigationRef } from './navigationRef';
 import { ROUTES } from './routes';
 
@@ -32,8 +33,24 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name={ROUTES.WELCOME} component={WelcomeScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          screenLayout: ({ children, route, options }) => {
+            return (
+              <ScreenWrapper
+                safeTop={options.safeTop}
+                safeBottom={options.safeBottom}
+                keyboardAware={options.keyboardAware}
+                backgroundColor={options.backgroundColor}
+              >
+                {children}
+              </ScreenWrapper>
+            );
+          }
+        }}
+      >
+        <Stack.Screen name={ROUTES.WELCOME} component={WelcomeScreen} options={{ safeTop: true }} />
         <Stack.Screen name={ROUTES.MAIN_TABS} component={MainTabNavigator} />
         <Stack.Screen name={ROUTES.DOCUMENT_NAVIGATOR} component={DocumentNavigator} />
         <Stack.Screen name={ROUTES.INTERVIEW_NAVIGATOR} component={InterviewNavigator} />

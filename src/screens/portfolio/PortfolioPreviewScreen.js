@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ActivityIndicator, Alert, SafeAreaView, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Alert, TouchableOpacity, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { ROUTES } from '../../navigation/routes';
@@ -45,7 +45,7 @@ export default function PortfolioPreviewScreen() {
   }, [navigation, portfolioId]);
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={[styles.toolbar, { backgroundColor: theme.surface, borderBottomColor: theme.border }]}>
         <TouchableOpacity style={styles.toolButton} onPress={() => navigation.navigate(ROUTES.PORTFOLIO_THEME, { portfolioId })}>
           <Icon name="palette" size={24} color={theme.primary} />
@@ -73,7 +73,7 @@ export default function PortfolioPreviewScreen() {
           showsVerticalScrollIndicator={false}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 }
 

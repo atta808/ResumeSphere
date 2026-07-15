@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { View, StyleSheet, ScrollView, Platform, Dimensions, SafeAreaView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform, Dimensions, ActivityIndicator } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { WebView } from 'react-native-webview';
 import { PremiumHeader, PremiumButton, useToast } from '../../components/common';
@@ -126,7 +126,7 @@ const ResumePreviewScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <PremiumHeader title="Resume Preview" onBack={() => navigation.goBack()} />
 
       <View style={styles.workspace}>
@@ -185,7 +185,7 @@ const ResumePreviewScreen = () => {
           </ScrollView>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

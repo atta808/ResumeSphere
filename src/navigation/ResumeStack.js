@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ROUTES } from './routes';
+import { ScreenWrapper } from '../components/common';
 
 import ResumeDashboardScreen from '../screens/resume/ResumeDashboardScreen';
 import ResumeEditorScreen from '../screens/resume/ResumeEditorScreen';
@@ -15,7 +16,24 @@ const Stack = createNativeStackNavigator();
 
 const ResumeStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={ROUTES.RESUME_DASHBOARD}>
+    <Stack.Navigator
+      initialRouteName={ROUTES.RESUME_DASHBOARD}
+      screenOptions={{
+        headerShown: false,
+        screenLayout: ({ children, route, options }) => {
+          return (
+            <ScreenWrapper
+              safeTop={options.safeTop}
+              safeBottom={options.safeBottom}
+              keyboardAware={options.keyboardAware}
+              backgroundColor={options.backgroundColor}
+            >
+              {children}
+            </ScreenWrapper>
+          );
+        }
+      }}
+    >
       <Stack.Screen name={ROUTES.RESUME_DASHBOARD} component={ResumeDashboardScreen} />
       <Stack.Screen name={ROUTES.RESUME_EDITOR} component={ResumeEditorScreen} />
       <Stack.Screen name={ROUTES.SECTION_EDITOR} component={SectionEditorScreen} />
