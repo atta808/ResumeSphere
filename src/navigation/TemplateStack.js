@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 const TemplateStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={ROUTES.TEMPLATES} component={TemplatesScreen} />
+      <Stack.Screen name={ROUTES.TEMPLATES_SCREEN} component={TemplatesScreen} />
     </Stack.Navigator>
   );
 };

@@ -1,31 +1,31 @@
-import * as SecureStore from 'expo-secure-store';
+import { SECURE_STORE_KEYS } from '../../config/secureStore';
+import { setSecureItem, getSecureItem, deleteSecureItem } from '../../utils/secureStoreWrapper';
 import ErrorHandler from '../ErrorHandler';
-
-const ACCESS_TOKEN_KEY = 'auth_access_token';
-const REFRESH_TOKEN_KEY = 'auth_refresh_token';
 
 class TokenManager {
   async saveTokens(accessToken, refreshToken) {
     try {
-      if (accessToken) await SecureStore.setItemAsync(ACCESS_TOKEN_KEY, accessToken);
-      if (refreshToken) await SecureStore.setItemAsync(REFRESH_TOKEN_KEY, refreshToken);
+      if (accessToken) await setSecureItem(SECURE_STORE_KEYS.AUTH_TOKEN, accessToken);
+      if (refreshToken) await setSecureItem(SECURE_STORE_KEYS.REFRESH_TOKEN, refreshToken);
     } catch (error) {
       ErrorHandler.logError(error, { context: 'TokenManager.saveTokens' });
     }
   }
 
   async getAccessToken() {
-    return await SecureStore.getItemAsync(ACCESS_TOKEN_KEY);
+    const res = await getSecureItem(SECURE_STORE_KEYS.AUTH_TOKEN);
+    return res.success ? res.value : null;
   }
 
   async getRefreshToken() {
-    return await SecureStore.getItemAsync(REFRESH_TOKEN_KEY);
+    const res = await getSecureItem(SECURE_STORE_KEYS.REFRESH_TOKEN);
+    return res.success ? res.value : null;
   }
 
   async clearTokens() {
     try {
-      await SecureStore.deleteItemAsync(ACCESS_TOKEN_KEY);
-      await SecureStore.deleteItemAsync(REFRESH_TOKEN_KEY);
+      await deleteSecureItem(SECURE_STORE_KEYS.AUTH_TOKEN);
+      await deleteSecureItem(SECURE_STORE_KEYS.REFRESH_TOKEN);
     } catch (error) {
       ErrorHandler.logError(error, { context: 'TokenManager.clearTokens' });
     }

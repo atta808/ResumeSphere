@@ -29,25 +29,25 @@ const HomeScreen = ({ navigation }) => {
           <HomeCard
             title="Resume Builder"
             icon="file-document-outline"
-            onPress={() => navigation.navigate(ROUTES.RESUME)}
+            onPress={() => navigation.navigate(ROUTES.RESUME_TAB)}
             theme={theme}
           />
           <HomeCard
             title="AI Assistant"
             icon="robot-outline"
-            onPress={() => navigation.navigate(ROUTES.AI_ASSISTANT)}
+            onPress={() => navigation.navigate(ROUTES.AI_TAB)}
             theme={theme}
           />
           <HomeCard
             title="Templates"
             icon="view-grid-outline"
-            onPress={() => navigation.navigate(ROUTES.TEMPLATES)}
+            onPress={() => navigation.navigate(ROUTES.TEMPLATES_TAB)}
             theme={theme}
           />
           <HomeCard
             title="Settings"
             icon="cog-outline"
-            onPress={() => navigation.navigate(ROUTES.SETTINGS)}
+            onPress={() => navigation.navigate(ROUTES.SETTINGS_TAB)}
             theme={theme}
           />
         </View>
